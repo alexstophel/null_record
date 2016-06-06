@@ -3,8 +3,10 @@ module NullRecord
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def fifth
-        super || null_object
+      %w(fifth first forty_two fourth last second third).freeze.each do |name|
+        define_method(name) do
+          super() || null_object
+        end
       end
 
       def find(id)
@@ -17,26 +19,6 @@ module NullRecord
         super(attributes) || null_object
       end
 
-      def first
-        super || null_object
-      end
-
-      def forty_two
-        super || null_object
-      end
-
-      def fourth
-        super || null_object
-      end
-
-      def last
-        super || null_object
-      end
-
-      def second
-        super || null_object
-      end
-
       def take(limit = nil)
         if limit && limit > 1
           result = super(limit)
@@ -44,10 +26,6 @@ module NullRecord
         else
           super(limit) || null_object
         end
-      end
-
-      def third
-        super || null_object
       end
     end
   end
