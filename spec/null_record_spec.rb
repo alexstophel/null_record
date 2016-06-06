@@ -8,15 +8,12 @@ end
 
 RSpec.describe NullRecord::ClassMethods do
   describe ".has_null_record" do
-    before do
-      ActiveRecord::Base.send(:include, NullRecord)
-    end
-
-    # TODO: Make this a better spec...
-    it "works" do
+    it "can be called on the class" do
       expect do
-        class User < ActiveRecord::Base
-          has_null_record
+        silence_warnings do
+          class User < ActiveRecord::Base
+            has_null_record
+          end
         end
       end.to_not raise_error
     end

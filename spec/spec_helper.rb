@@ -12,6 +12,10 @@ ActiveRecord::Base.establish_connection(
 )
 
 RSpec.configure do |config|
+  config.before(:all) do
+    ActiveRecord::Base.send(:include, NullRecord)
+  end
+
   config.before(:each) do
     ActiveRecord::Base.connection.execute <<-SQL
       DROP TABLE IF EXISTS users;
