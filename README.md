@@ -1,6 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/alexstophel/null_record/badges/gpa.svg)](https://codeclimate.com/github/alexstophel/null_record)
 [![Test Coverage](https://codeclimate.com/github/alexstophel/null_record/badges/coverage.svg)](https://codeclimate.com/github/alexstophel/null_record/coverage)
 [![Build Status](https://travis-ci.org/alexstophel/null_record.svg?branch=master)](https://travis-ci.org/alexstophel/null_record)
+[![Gem Version](https://badge.fury.io/rb/null_record.svg)](https://badge.fury.io/rb/null_record)
 
 # NullRecord
 
@@ -40,7 +41,35 @@ Or install it yourself as:
 
     $ gem install null_record
 
+If you're including this in a Rails application, create an initializer to
+include NullRecord in ActiveRecord::Base:
+
+```ruby
+# config/initializers/null_record.rb
+
+ActiveSupport.on_load(:active_record) do
+  ActiveRecord::Base.send(:include, NullRecord)
+end
+```
+
 ## Usage
+
+NullRecord patches ActiveRecord finder methods to return a Null Object instead
+of nil. How neat! Check it out:
+
+Standard ActiveRecord:
+
+```ruby
+User.find(1)
+=> nil
+```
+
+ActiveRecord w/ NullRecord:
+
+```ruby
+User.find(1)
+=> <null:User>
+```
 
 ## Development
 
