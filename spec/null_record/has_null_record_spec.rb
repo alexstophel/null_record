@@ -4,7 +4,11 @@ RSpec.describe NullRecord::HasNullRecord do
   before(:all) do
     silence_warnings do
       class User < ActiveRecord::Base
-        has_null_record
+        has_null_record do
+          def name
+            "Default"
+          end
+        end
       end
     end
   end
@@ -31,6 +35,10 @@ RSpec.describe NullRecord::HasNullRecord do
 
       it "makes predicates return false" do
         expect(null_object.is_this_false?).to eq(false)
+      end
+
+      it "defines the name method with the definition in the config block" do
+        expect(null_object.name).to eq("Default")
       end
     end
   end

@@ -10,8 +10,8 @@ module NullRecord
 
   module ClassMethods
     # rubocop:disable Style/PredicateName
-    def has_null_record
-      NullRecord::HasNullRecord.define_on(self)
+    def has_null_record(&block)
+      NullRecord::HasNullRecord.define_on(self, &block)
     end
     # rubocop:enable Style/PredicateName
   end

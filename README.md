@@ -71,6 +71,31 @@ User.find(1)
 => <null:User>
 ```
 
+In order to take advantage of this patching, you need to call the 
+`has_null_record` class method in your model:
+
+```ruby
+class User < ActiveRecord::Base
+  has_null_record
+end
+```
+
+NullRecord uses the awesome [Naught](https://github.com/avdi/naught) gem by Advi
+Grimm to build Null Objects. You can pass a configuration block to supplement
+the default configuration:
+
+```ruby
+class User < ActiveRecord::Base
+  has_null_record do |config|
+    config.impersonate User
+
+    def name
+      "Please sign in..."
+    end
+  end
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

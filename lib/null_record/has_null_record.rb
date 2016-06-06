@@ -1,8 +1,8 @@
 module NullRecord
   module HasNullRecord
     class << self
-      def define_on(model)
-        build_null_object(model, default_naught_config(model))
+      def define_on(model, &block)
+        build_null_object(model, default_naught_config(model, &block))
         model.send(:include, NullRecord::FinderMethods)
         model.send(:include, NullRecord::NullObject)
       end
@@ -16,10 +16,14 @@ module NullRecord
         end
       end
 
-      def default_naught_config(model)
+      def default_naught_config(model, &block)
         proc do |config|
           config.mimic model.to_s.constantize
           config.predicates_return false
+
+          if block_given?
+            config.send(:customization_module).module_exec(self, &block)
+          end
         end
       end
     end
