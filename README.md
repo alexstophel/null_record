@@ -61,7 +61,7 @@ Standard ActiveRecord:
 
 ```ruby
 User.find(1)
-=> nil
+=> ActiveRecord::RecordNotFound: Couldn't find User with 'id'=1
 ```
 
 ActiveRecord w/ NullRecord:
