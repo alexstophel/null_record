@@ -7,10 +7,8 @@
 
 NullRecord is intended to make using the [Null
 Object](https://en.wikipedia.org/wiki/Null_Object_pattern) pattern with
-ActiveRecord easier. This gem is fairly simple, and you could likely implement
-all of the functionality without this gem relatively easy. I initially had all
-of this logic in a project and decided to rip it out to make it easier to share
-among projects and other AR objects.
+ActiveRecord easier. I initially had all of this logic in a project and decided 
+to rip it out to make it easier to share among projects.
 
 Not sure what the Null Object pattern is all about? Here's some resources to get
 you started:
